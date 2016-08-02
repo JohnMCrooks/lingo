@@ -5,13 +5,14 @@ module.exports = function(app) {
 
         $scope.UserPreferences = UserService.getPreferences();
 
-        $scope.signIn = function() {
+        $scope.signIn = function(event) {
+          event.preventDefault();
             console.log("clicked log in", $scope.UserPreferences);
             UserService.postExistingUser($scope.userInput, $scope.userPassword)
         }
 
-        $scope.signUp = function() {
-            // console.log("clicked sign up");
+        $scope.signUp = function(event) {
+            event.preventDefault();
             UserService.postUserInfo($scope.userInput, $scope.userPassword)
 
         }

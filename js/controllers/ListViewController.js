@@ -3,7 +3,7 @@ module.exports = function(app) {
         '$scope', '$location',
         function(NewsService, UserService, $sce, $routeParams,$scope, $location) {
             $scope.pageNumber = 1;
-            $scope.itemsPerPage = 5;
+            $scope.itemsPerPage = 7;
 
             $scope.specificPref = UserService.getPreferences();
 
@@ -35,7 +35,7 @@ module.exports = function(app) {
             $scope.goback = function() {
 
                 $scope.pageNumber -= 1;
-                $scope.itemsPerPage = 25;
+                $scope.itemsPerPage = 5;
 
                 NewsService.async($scope.pageNumber, $scope.itemsPerPage).then(function(newsArray) {
                     $scope.newsArray = newsArray;
@@ -45,7 +45,7 @@ module.exports = function(app) {
             $scope.goforward = function() {
 
                 $scope.pageNumber += 1;
-                $scope.itemsPerPage = 25;
+                $scope.itemsPerPage = 5;
 
                 NewsService.async($scope.pageNumber, $scope.itemsPerPage).then(function(newsArray) {
                     $scope.newsArray = newsArray;

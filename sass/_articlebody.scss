@@ -6,15 +6,16 @@
   width: 100%;
 }
 .translated {
-    text-decoration: underline;
-    cursor: pointer;
-    max-width: 100%;
-    white-space: nowrap;
-    overflow: hidden;
-    background-color: yellow;
-    color: #000;
-font-family: "Avenir Next";
-font-size: 100%;
+  /* text-decoration: underline; */
+  cursor: pointer;
+  max-width: 100%;
+  white-space: nowrap;
+  /* overflow: hidden; */
+  /* background-color: yellow; */
+  color: #3121f3;
+  font-family: "Avenir Next";
+  /* font-size: 100%; */
+  padding: 1%;
 }
 
 #headline {

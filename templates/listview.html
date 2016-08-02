@@ -17,41 +17,60 @@
 <ul class="sub-nav menu" role="navigation" title="Filter Menu List">
     <li class="sub-nav-title">Filter:</li>
     <li class="active"><span class="show-for-sr">You're viewing </span><a href="#news" ng-click='clickedListView()'>Full Article</a></li>
-    <li ><a href="#news/list" ng-click='clickedFullArticle()'>By Headline</a></li>
+    <li><a href="#news/list" ng-click='clickedFullArticle()'>By Headline</a></li>
 </ul>
 
 <!-- START CATEGORIES -->
-<!-- <div class="row">
-    <div class="small-3 columns">
-        <a href="#news" ng-click="clickedFullArticle()">Full Article</a>
-        <a href="#news/list" ng-click="clickedListView()">List View</a>
-        <a href="#" ng-show="specificPref.politics">Politics</a>
-        <a href="#" ng-show="specificPref.business">Business</a>
-        <a href="#" ng-show="specificPref.technology">Technology</a>
-        <a href="#" ng-show="specificPref.arts">Arts</a>
-        <a href="#" ng-show="specificPref.sports">Sports</a>
-    </div>
-</div> -->
-<!-- END CATEGORIES -->
 
 <!-- START ARTICLE BODY -->
 
-<div class="row" >
+<!-- <div class="row">
 
-<div class="small-8 medium-6 large-9 small-centered columns" >
+    <div class="small-8 medium-6 large-9 small-centered columns">
 
-<div class="header panel" ng-repeat="article in newsArray" >
+        <div class="header panel" ng-repeat="article in newsArray">
 
- <div class="sign" id="articletitle">
-   <h1 ><a href="#/article/{{article.articleId}}" >{{article.title}}</a></h1>
- </div>
+            <div class="sign" id="articletitle">
+                <h1><a href="#/article/{{article.articleId}}" >{{article.title}}</a></h1>
+                <h6>({{article.type}})</h6>
+            </div>
 
+        </div>
+        <button ng-click="goback()">
+            <</button>
+                <span>{{pageNumber}}</span>
+                <button ng-click="goforward()">></button>
+    </div>
+</div> -->
+
+<div class="titlerow">
+
+
+  <div class="small-12 columns small-centered row" ng-repeat="article in newsArray">
+      <article class="event">
+
+
+
+        <div class=>
+          <p class="event-desc-detail"><span class="event-desc-time"></span>{{article.title}}</p>
+          <h4 class="event-desc-header">{{article.type}}</h4>
+
+          <a href="#/article/{{article.articleId}}" >Read More</a>
+        </div>
+
+
+      </article>
+
+      <hr>
+  </div>
+  <button ng-click="goback()">
+      <</button>
+          <span>{{pageNumber}}</span>
+          <button ng-click="goforward()">></button>
 </div>
-<button ng-click="goback()"><</button>
-    <span>{{pageNumber}}</span>
-  <button ng-click="goforward()">></button>
-</div>
-</div>
+</article>
+
+
 <!-- END ARTICLE BODY -->
 
 
@@ -63,26 +82,26 @@
     <li ng-show="specificPref.technology">Technology</li>
     <li ng-show="specificPref.business">Business</li>
     <li ng-show="specificPref.politics">Politics</li>
-    <li><a href="#preferences" >Not seeing what you like?</a></li>
+    <li><a href="#preferences">Not seeing what you like?</a></li>
 </ul>
 <!-- SECOND FOOTER  -->
 
 <!-- ARTICLE FOOTER -->
 
-    <footer class="footer">
-        <div class="row">
-            <div class="small-12 columns">
-                <img src="images/O(white).png" alt="" id="homefooter" />
-                <p class="links">
-                    <a href="#home">Home</a>
-                    <a href="#team">Meet The Team</a>
-                    <a href="#team" ng-click="signOut()">Sign Out</a>
-                    <a href="#preferences">Preferences</a>
-                </p>
-                <p class="copywrite">The Iron Yard © 2016</p>
-            </div>
+<footer class="footer">
+    <div class="row">
+        <div class="small-12 columns">
+            <img src="images/O(white).png" alt="" id="homefooter" />
+            <p class="links">
+                <a href="#home">Home</a>
+                <a href="#team">Meet The Team</a>
+                <a href="#team" ng-click="signOut()">Sign Out</a>
+                <a href="#preferences">Preferences</a>
+            </p>
+            <p class="copywrite">The Iron Yard © 2016</p>
         </div>
-    </footer>
+    </div>
+</footer>
 
 <!-- END ARTICLE FOOTER -->
 

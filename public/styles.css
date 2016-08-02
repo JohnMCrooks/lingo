@@ -98,7 +98,10 @@ body {
   margin: 0 auto;
   background-color: #003366;
   opacity: .91;
-  border-radius: 20px; }
+  border-radius: 20px;
+  -webkit-box-shadow: 12px 11px 12px 2px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 12px 11px 12px 2px rgba(0, 0, 0, 0.5);
+  box-shadow: 12px 11px 12px 2px rgba(0, 0, 0, 0.5); }
   .signup-panel i.fi-lock {
     margin-right: 74%; }
   .signup-panel i {
@@ -589,6 +592,52 @@ body {
 #listViewRow {
   font-size: 20px; }
 
+.titlerow {
+  width: 75%; }
+
+#titles {
+  background-color: white; }
+
+.event {
+  padding: 1rem 1rem 1rem 0;
+  display: table; }
+
+.event-date {
+  width: 6rem;
+  margin: 0 auto 1rem;
+  display: table-cell;
+  width: auto; }
+  .event-date .event-month {
+    margin: 0;
+    background: #eee;
+    padding: 0.5rem 2rem;
+    text-align: center; }
+  .event-date .event-day {
+    margin: 0;
+    border: 1px solid #eee;
+    padding: 0 2rem;
+    text-align: center;
+    font-size: 2rem; }
+
+.event-desc {
+  padding: 0 0 0 1rem;
+  text-align: left;
+  display: table-cell;
+  vertical-align: top;
+  background-color: white; }
+  .event-desc .event-desc-header {
+    margin: 0 0 0.5rem 0;
+    padding: 0; }
+  .event-desc .event-desc-detail {
+    margin: 0 0 0.25rem;
+    padding: 0; }
+  .event-desc .event-desc-time {
+    font-weight: bold; }
+  .event-desc .rsvp.button {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    margin: 0; }
+
 .row {
   max-width: 100%; }
 
@@ -767,7 +816,7 @@ body {
     font: 1.5rem "Avenir Next";
     padding: 1.2rem 2rem 2rem;
     margin-top: -1.25rem; }
-    .header.panel p span {
+    .header.panel p #lingo {
       color: #548FCE;
       text-transform: uppercase;
       font-size: 75%;
@@ -1225,15 +1274,16 @@ input[data-toggle]:checked + label:active {
   width: 100%; }
 
 .translated {
-  text-decoration: underline;
+  /* text-decoration: underline; */
   cursor: pointer;
   max-width: 100%;
   white-space: nowrap;
-  overflow: hidden;
-  background-color: yellow;
-  color: #000;
+  /* overflow: hidden; */
+  /* background-color: yellow; */
+  color: #3121f3;
   font-family: "Avenir Next";
-  font-size: 100%; }
+  /* font-size: 100%; */
+  padding: 1%; }
 
 #headline {
   font-size: 215%;

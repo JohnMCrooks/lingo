@@ -4,7 +4,7 @@ module.exports = function(app) {
         '$scope', '$location',
         function(NewsService, UserService, $sce, $routeParams,$scope, $location) {
             $scope.pageNumber = 1;
-            $scope.itemsPerPage = 5;
+            $scope.itemsPerPage = 7;
 
             $scope.specificPref = UserService.getPreferences();
 
@@ -36,7 +36,7 @@ module.exports = function(app) {
             $scope.goback = function() {
 
                 $scope.pageNumber -= 1;
-                $scope.itemsPerPage = 25;
+                $scope.itemsPerPage = 5;
 
                 NewsService.async($scope.pageNumber, $scope.itemsPerPage).then(function(newsArray) {
                     $scope.newsArray = newsArray;
@@ -46,7 +46,7 @@ module.exports = function(app) {
             $scope.goforward = function() {
 
                 $scope.pageNumber += 1;
-                $scope.itemsPerPage = 25;
+                $scope.itemsPerPage = 5;
 
                 NewsService.async($scope.pageNumber, $scope.itemsPerPage).then(function(newsArray) {
                     $scope.newsArray = newsArray;
@@ -133,13 +133,14 @@ module.exports = function(app) {
 
         $scope.UserPreferences = UserService.getPreferences();
 
-        $scope.signIn = function() {
+        $scope.signIn = function(event) {
+          event.preventDefault();
             console.log("clicked log in", $scope.UserPreferences);
             UserService.postExistingUser($scope.userInput, $scope.userPassword)
         }
 
-        $scope.signUp = function() {
-            // console.log("clicked sign up");
+        $scope.signUp = function(event) {
+            event.preventDefault();
             UserService.postUserInfo($scope.userInput, $scope.userPassword)
 
         }
@@ -351,8 +352,8 @@ module.exports = function(app) {
                 }).then(function(results) {
                     // console.log("these are the results", results.data);
                     // console.log("posted new user")
-                    if (results.data === false) {
-                        alert("This Username is taken. If you already have an account, please sign in, if not, please choose another Username")
+                    if (results.data === false || results.data === '') {
+                        alert("If you already have an account, please sign in, if not, please choose another Username.")
                     } else {
                         $location.path('/preferences');
                     }
@@ -372,7 +373,7 @@ module.exports = function(app) {
                 }).then(function(results) {
                     // console.log("these are the results", results.data);
                     // console.log("posted existing user")
-                    if (results.data === true) {
+                    if (results.data === false) {
                         $location.path('/news');
                     } else {
                         alert("Password Incorrect")

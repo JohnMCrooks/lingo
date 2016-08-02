@@ -18,8 +18,8 @@ module.exports = function(app) {
                 }).then(function(results) {
                     // console.log("these are the results", results.data);
                     // console.log("posted new user")
-                    if (results.data === false) {
-                        alert("This Username is taken. If you already have an account, please sign in, if not, please choose another Username")
+                    if (results.data === false || results.data === '') {
+                        alert("If you already have an account, please sign in, if not, please choose another Username.")
                     } else {
                         $location.path('/preferences');
                     }
@@ -39,7 +39,7 @@ module.exports = function(app) {
                 }).then(function(results) {
                     // console.log("these are the results", results.data);
                     // console.log("posted existing user")
-                    if (results.data === true) {
+                    if (results.data === false) {
                         $location.path('/news');
                     } else {
                         alert("Password Incorrect")
