@@ -262,20 +262,20 @@ public class LingoRestController {
         if(dictionaries.count() ==0 ){
             File f = new File("Tri-Ling-part.csv");
             Scanner scanner = new Scanner(f);
-            while(scanner.hasNext()){
+            while(scanner.hasNext()) {
                 String yandexEspanol = "https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20160717T192757Z.a8769bfc4971497a.b0ecbc4ec493534bde16063368368af6c89a84db&text=%s&lang=es";
                 String yandexFrench = "https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20160717T192757Z.a8769bfc4971497a.b0ecbc4ec493534bde16063368368af6c89a84db&text=%s&lang=fr";
                 String word = scanner.nextLine();
-                if(dictionaries.findByEnglish(word) == null) {
+                if (dictionaries.findByEnglish(word) == null) {
                     yandexEspanol = String.format(yandexEspanol, word);
                     yandexFrench = String.format(yandexFrench, word);
                     YandexJson spanishJson = restTemplate.getForObject(yandexEspanol, YandexJson.class);
                     YandexJson frenchJson = restTemplate.getForObject(yandexFrench, YandexJson.class);
-                    if (spanishJson.getCode()!=200 || frenchJson.getCode()!= 200){
+                    if (spanishJson.getCode() != 200 || frenchJson.getCode() != 200) {
                         System.out.println("Returned a bad code: " + frenchJson.getCode() + " and " + spanishJson.getCode());
                         continue;
                     }
-                    Dictionary newWord = new Dictionary(" "+word +" ", " "+frenchJson.toString().substring(1,frenchJson.toString().length()-1)+" "," " + spanishJson.toString().substring(1, spanishJson.toString().length()-1)+" ");
+                    Dictionary newWord = new Dictionary(" " + word + " ", " " + frenchJson.toString().substring(1, frenchJson.toString().length() - 1) + " ", " " + spanishJson.toString().substring(1, spanishJson.toString().length() - 1) + " ");
                     dictionaries.save(newWord);
                     Thread.sleep(300);
                 }
