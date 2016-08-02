@@ -277,7 +277,7 @@ public class LingoRestController {
                     }
                     Dictionary newWord = new Dictionary(" " + word + " ", " " + frenchJson.toString().substring(1, frenchJson.toString().length() - 1) + " ", " " + spanishJson.toString().substring(1, spanishJson.toString().length() - 1) + " ");
                     dictionaries.save(newWord);
-                    Thread.sleep(300);
+                    Thread.sleep(100);
                 }
             }
         }
