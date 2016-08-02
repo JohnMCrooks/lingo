@@ -11,9 +11,11 @@ import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.http.HttpRequest;
 import org.springframework.web.bind.annotation.*;
 import com.theironyard.services.ArticleRepository;
 import com.theironyard.services.UserRepository;
+import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
@@ -237,21 +239,47 @@ public class LingoRestController {
         session.invalidate();
     }
 
-    public void parseDictionary() throws FileNotFoundException {
+    public void parseDictionary() throws FileNotFoundException, InterruptedException {
         //Parsing the language dictionary from a csv file into the db at runtime if it hasn't already been created.
 
-        if(dictionaries.count() == 0) {
-            File f = new File("Tri-Lingual-Library.csv");
+//        if(dictionaries.count() == 0) {
+//            File f = new File("Tri-Lingual-Library.csv");
+//            Scanner scanner = new Scanner(f);
+//            scanner.nextLine();
+//            while (scanner.hasNext()) {
+//                String[] arrayString = scanner.nextLine().split(",");
+//                Dictionary dictEntry = new Dictionary(arrayString[0], arrayString[1], arrayString[2]);
+//                dictionaries.save(dictEntry);
+//            }
+//            System.out.println("Language Dictionary has been created");//for console testing
+//        } else {
+//            System.out.println("Language Dictionary already exists");//for console testing
+//        }
+
+        //testing another method here
+        RestTemplate restTemplate = new RestTemplate();
+
+        if(dictionaries.count() ==0 ){
+            File f = new File("Tri-Ling-part.csv");
             Scanner scanner = new Scanner(f);
-            scanner.nextLine();
-            while (scanner.hasNext()) {
-                String[] arrayString = scanner.nextLine().split(",");
-                Dictionary dictEntry = new Dictionary(arrayString[0], arrayString[1], arrayString[2]);
-                dictionaries.save(dictEntry);
+            while(scanner.hasNext()){
+                String yandexEspanol = "https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20160717T192757Z.a8769bfc4971497a.b0ecbc4ec493534bde16063368368af6c89a84db&text=%s&lang=es";
+                String yandexFrench = "https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20160717T192757Z.a8769bfc4971497a.b0ecbc4ec493534bde16063368368af6c89a84db&text=%s&lang=fr";
+                String word = scanner.nextLine();
+                if(dictionaries.findByEnglish(word) == null) {
+                    yandexEspanol = String.format(yandexEspanol, word);
+                    yandexFrench = String.format(yandexFrench, word);
+                    YandexJson spanishJson = restTemplate.getForObject(yandexEspanol, YandexJson.class);
+                    YandexJson frenchJson = restTemplate.getForObject(yandexFrench, YandexJson.class);
+                    if (spanishJson.getCode()!=200 || frenchJson.getCode()!= 200){
+                        System.out.println("Returned a bad code: " + frenchJson.getCode() + " and " + spanishJson.getCode());
+                        continue;
+                    }
+                    Dictionary newWord = new Dictionary(" "+word +" ", " "+frenchJson.toString().substring(1,frenchJson.toString().length()-1)+" "," " + spanishJson.toString().substring(1, spanishJson.toString().length()-1)+" ");
+                    dictionaries.save(newWord);
+                    Thread.sleep(300);
+                }
             }
-            System.out.println("Language Dictionary has been created");//for console testing
-        } else {
-            System.out.println("Language Dictionary already exists");//for console testing
         }
     }
 }

@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface DictionaryRepository extends CrudRepository<Dictionary, Integer> {
+   Dictionary findByEnglish(String word);
 }
