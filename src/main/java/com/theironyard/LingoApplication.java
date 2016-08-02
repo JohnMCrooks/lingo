@@ -49,9 +49,6 @@ public class LingoApplication implements CommandLineRunner {
 			Future<ResultContainter> page5 = apiLookupService.findResults("https://api.nytimes.com/svc/topstories/v2/business.json?api-key=289858bf10514c09b02e561994f4ab45");
 			Thread.sleep(86400000);
 		}
-
-		System.out.println("Elapsed time: " + (System.currentTimeMillis() - start));
-
 	} //end run method
 
 	public static void main(String[] args) throws IOException {

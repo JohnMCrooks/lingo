@@ -51,6 +51,7 @@ public class LingoRestController {
         dbui.createWebServer().start();
         parseDictionary();
 
+        //prepopulate the Category on first run.
         Category cat = new Category("business", 1);
         System.out.println(cat);
         if (categories.count() == 0) {
@@ -119,8 +120,8 @@ public class LingoRestController {
             userA.setPolitics(user.getPolitics());
             userA.setLangLevel(user.getLangLevel());
 
-
-            if (user.getArts()) {                                           // if a preference is set to true - add the relationship
+            // if a preference is set to true - add the relationship
+            if (user.getArts()) {
                 Category cat = categories.findFirstByType("arts");
                 userA.getCatList().add(cat);
             }
@@ -141,10 +142,12 @@ public class LingoRestController {
                 userA.getCatList().add(cat);
             }
 
-            users.save(userA);                                               // after all the changes, save the updated user to the DB
+            // after all the changes, save the updated user to the DB
+            users.save(userA);
             System.out.println("User saved to Database...");
 
-            return users.save(userA);                                       //return the updated user object for the Front End
+            //return the updated user object for the Front End
+            return users.save(userA);
 
         }
     }
@@ -206,6 +209,8 @@ public class LingoRestController {
         User user = users.findByUsername((String) session.getAttribute("username"));
         Article justTheOne = articles.findById(articleID);
         String content = "";
+
+        //Grabbing the desired language level
         if (user.getLangLevel().equals("span1")) {
             content = justTheOne.getSpan1();
         } else if (user.getLangLevel().equals("span2")) {
@@ -220,9 +225,10 @@ public class LingoRestController {
             content = justTheOne.getFrench3();
         }
 
-        ReturnArticle ra = new ReturnArticle(0, content, justTheOne.getTitle(), justTheOne.getType(), justTheOne.getId());
+        //returning the article in a consistent format with the other route.
+        ReturnArticle returnArticle = new ReturnArticle(0, content, justTheOne.getTitle(), justTheOne.getType(), justTheOne.getId());
 
-        return ra;
+        return returnArticle;
     }
 
 
