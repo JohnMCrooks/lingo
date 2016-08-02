@@ -181,6 +181,7 @@ public class LingoRestController {
                 returnArray.add(ra1);
             }
 
+            //Create a new array of random, by preference, non-duplicate articles to pass to the front-end.
             ArrayList<ReturnArticle> limitedArray = new ArrayList<>();
             int i = 0;
             do{
