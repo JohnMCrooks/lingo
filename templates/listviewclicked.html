@@ -29,30 +29,27 @@
     <div class="row" id="articleRow">
 
         <div class="small-8 medium-6 large-9 small-centered columns" id="articleholder" >
-            <div id="articletitle">
-                <h1 id="headline">{{currentArticle.title}}</h1>
-                <div class="pagination">
-                    <button ng-click="goback()">
-                        <</button>
-                            <span>{{pageNumber}}</span>
-                            <button ng-click="goforward()">></button>
-                </div>
-            </div>
+
+          <div id="articletitle">
+              <h1 id="headline">{{currentArticle.title}}</h1>
+              <div class="pagination">
+                  <button ng-click="goback()">
+                      <</button>
+                          <span>{{pageNumber}}</span>
+                          <button ng-click="goforward()">></button>
+              </div>
+          </div>
 
             <div class="header panel" id="articlebox">
 
 
                 <p id="articlecontent"><span>{{currentArticle.author}}</span>
 
-                    <span ng-bind-html="makeArticleSafe(currentArticle.span1)" id="articletext"></span>
+
+                    <span ng-bind-html="makeArticleSafe(currentArticle.content)" id="articletext"></span>
 
                 </p>
-                <div class="pagination">
-                    <button ng-click="goback()">
-                        <</button>
-                            <span>{{pageNumber}}</span>
-                            <button ng-click="goforward()">></button>
-                </div>
+
 
             </div>
         </div>

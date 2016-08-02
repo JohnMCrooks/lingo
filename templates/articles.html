@@ -29,7 +29,7 @@
     <div class="row" id="articleRow">
 
         <div class="small-8 medium-6 large-9 small-centered columns" id="articleholder" ng-repeat="article in newsArray">
-            <div id="articletitle">
+            <!-- <div id="articletitle">
                 <h1 id="headline">{{article.title}}</h1>
                 <div class="pagination">
                     <button ng-click="goback()">
@@ -37,14 +37,23 @@
                             <span>{{pageNumber}}</span>
                             <button ng-click="goforward()">></button>
                 </div>
-            </div>
+            </div> -->
 
             <div class="header panel" id="articlebox">
+              <div id="articletitle">
+                  <h1 id="headline">{{article.title}}</h1>
+                  <div class="pagination">
+                      <button ng-click="goback()">
+                          <</button>
+                              <span>{{pageNumber}}</span>
+                              <button ng-click="goforward()">></button>
+                  </div>
+              </div>
 
 
                 <p id="articlecontent"><span>{{article.author}}</span>
 
-                    <span ng-bind-html="makeArticleSafe(article.span1)" id="articletext"></span>
+                    <span ng-bind-html="makeArticleSafe(article.content)" id="articletext"></span>
                 </p>
                 <div class="pagination">
                     <button ng-click="goback()">

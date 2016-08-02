@@ -1,7 +1,7 @@
 module.exports = function(app) {
-    app.controller('ListViewController', ['NewsService', 'UserService', '$routeParams',
+    app.controller('ListViewController', ['NewsService', 'UserService','$sce', '$routeParams',
         '$scope', '$location',
-        function(NewsService, UserService, $routeParams,$scope, $location) {
+        function(NewsService, UserService, $sce, $routeParams,$scope, $location) {
             $scope.pageNumber = 1;
             $scope.itemsPerPage = 5;
 
@@ -15,6 +15,10 @@ module.exports = function(app) {
                   console.log("in articleId then", result);
                   $scope.currentArticle = result.data;
                 });
+            }
+
+            $scope.makeArticleSafe = function(article) {
+                return $sce.trustAsHtml(article);
             }
 
             var getArts = function() {
